@@ -1,29 +1,30 @@
-# Use an official PHP 5.6 image as the base image
-FROM php:5.6-apache
+# Use an official Ubuntu image as the base image
+FROM ubuntu:latest
 
-# Install MySQL extension for PHP 5
-RUN docker-php-ext-install mysql
+# Install required dependencies
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    wget \
+    tar \
+    net-tools \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set the MySQL root password and create the ATutor database
-ENV MYSQL_ROOT_PASSWORD=rootpassword
-ENV MYSQL_DATABASE=atutordb
-ENV MYSQL_USER=atutor
-ENV MYSQL_PASSWORD=atutorpass
+# Copy the XAMPP installer script to the image
+COPY xampp.run /tmp/xampp-installer.run
 
-# Copy the ATutor source code into the container's web root
-COPY ./ATutor /var/www/html
+# Make the installer script executable
+RUN chmod +x /tmp/xampp-installer.run
 
-# Expose port 80 for Apache
+# Run XAMPP installer in unattended mode
+RUN /tmp/xampp-installer.run --mode unattended
+
+# Expose ports for Apache and MySQL
 EXPOSE 80
+EXPOSE 443
+EXPOSE 3306
 
-# Enable Apache rewrite module
-RUN a2enmod rewrite
+# Copy ATutor source code to /opt/lampp/htdocs
+COPY ./ATutor /opt/lampp/htdocs/atutor
 
-# Configure PHP session save path
-RUN mkdir -p /var/www/html/sessions && \
-    chown www-data:www-data /var/www/html/sessions && \
-    chmod 733 /var/www/html/sessions && \
-    echo "session.save_path = /var/www/html/sessions" >> /usr/local/etc/php/php.ini
-
-# Start Apache
-CMD ["apache2-foreground"]
+# Start XAMPP
+CMD ["/bin/bash", "-c", "/opt/lampp/lampp start && tail -f /dev/null"]
