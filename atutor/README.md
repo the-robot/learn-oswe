@@ -18,7 +18,7 @@ Once file is downloaded place in same directory as docker file with file name `x
 During the ATutor installation, you might need to go inside container and fix permissions if needed, I do not bother to fix in Dockerfile atm.
 
 ```bash
-docker exec -it atutor-mysql /bin/bash
+docker exec -it oswe-atutor /bin/bash
 ```
 
 Please follow the instruction from the webpage at `localhost:8080/atutor`.
