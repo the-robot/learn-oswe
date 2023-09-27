@@ -16,3 +16,5 @@ During the ATutor installation, you might need to go inside container and fix pe
 ```bash
 docker exec -it atutor-mysql /bin/bash
 ```
+
+Default XAMPP credentials for MySQL is `root` and no password.
