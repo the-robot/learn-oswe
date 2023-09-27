@@ -1,0 +1,14 @@
+version: '3'
+services:
+  atutor-mysql:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: atutor-mysql
+    ports:
+      - "8080:80"
+    networks:
+      - atutor-network
+
+networks:
+  atutor-network:

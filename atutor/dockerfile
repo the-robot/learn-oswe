@@ -1,0 +1,29 @@
+# Use an official PHP 5.6 image as the base image
+FROM php:5.6-apache
+
+# Install MySQL extension for PHP 5
+RUN docker-php-ext-install mysql
+
+# Set the MySQL root password and create the ATutor database
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_DATABASE=atutordb
+ENV MYSQL_USER=atutor
+ENV MYSQL_PASSWORD=atutorpass
+
+# Copy the ATutor source code into the container's web root
+COPY ./ATutor /var/www/html
+
+# Expose port 80 for Apache
+EXPOSE 80
+
+# Enable Apache rewrite module
+RUN a2enmod rewrite
+
+# Configure PHP session save path
+RUN mkdir -p /var/www/html/sessions && \
+    chown www-data:www-data /var/www/html/sessions && \
+    chmod 733 /var/www/html/sessions && \
+    echo "session.save_path = /var/www/html/sessions" >> /usr/local/etc/php/php.ini
+
+# Start Apache
+CMD ["apache2-foreground"]
