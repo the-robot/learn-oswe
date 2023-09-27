@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    container_name: atutor-mysql
+    container_name: oswe-atutor
     ports:
       - "8080:80"
     command: "/bin/bash -c '/opt/lampp/lampp start && tail -f /dev/null'"
