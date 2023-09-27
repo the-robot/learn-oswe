@@ -1,17 +1,12 @@
 version: '3'
 services:
-  atutor-mysql:
+  oswe-atutor:
     build:
       context: .
       dockerfile: dockerfile
     container_name: atutor-mysql
     ports:
       - "8080:80"
-    environment:
-      - MYSQL_ROOT_PASSWORD=toor
-      - MYSQL_DATABASE=atutor
-      - MYSQL_USER=atutor
-      - MYSQL_PASSWORD=pass
     command: "/bin/bash -c '/opt/lampp/lampp start && tail -f /dev/null'"
     networks:
       - atutor-network
