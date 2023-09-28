@@ -19,7 +19,10 @@ RUN chmod +x /tmp/xampp-installer.run
 RUN /tmp/xampp-installer.run --mode unattended
 
 # Replace extra httpd-xampp.conf
-COPY httpd-xampp.conf /opt/lampp/etc/extra/httpd-xampp.conf
+COPY container-configs/httpd-xampp.conf /opt/lampp/etc/extra/httpd-xampp.conf
+
+# Replace default MySQL config
+COPY container-configs/my.cnf /opt/lampp/etc/my.cnf
 
 # Expose ports for Apache and MySQL
 EXPOSE 80
