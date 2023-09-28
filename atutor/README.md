@@ -22,10 +22,10 @@ docker exec -it oswe-atutor /bin/bash
 
 Please follow the instruction from the webpage at `localhost:8080/atutor`.
 
-> You can give the following for setup accounts in installation.
-> **Administrator:** `admin:admin | admin@offsec.com`
-> **Site contact email:** `system@offsec.com`
-> **Personal:** `offsec:offsec | offsec@offsec.com`
+> You can give the following for setup accounts in installation.  
+> **Administrator:** admin:admin | admin@offsec.com  
+> **Site contact email:** system@offsec.com  
+> **Personal:** offsec:offsec | offsec@offsec.com  
 
 Default XAMPP credentials for MySQL is `root` and no password.
 
