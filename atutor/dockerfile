@@ -21,8 +21,11 @@ RUN /tmp/xampp-installer.run --mode unattended
 # Replace extra httpd-xampp.conf
 COPY container-configs/httpd-xampp.conf /opt/lampp/etc/extra/httpd-xampp.conf
 
-# Replace default MySQL config
+# Replace default MySQL config and fix permission
 COPY container-configs/my.cnf /opt/lampp/etc/my.cnf
+RUN touch /opt/lampp/logs/mysql.log
+RUN chown mysql:mysql /opt/lampp/logs/mysql.log
+RUN chmod 640 /opt/lampp/logs/mysql.log
 
 # Expose ports for Apache and MySQL
 EXPOSE 80
