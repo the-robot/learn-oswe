@@ -18,6 +18,9 @@ RUN chmod +x /tmp/xampp-installer.run
 # Run XAMPP installer in unattended mode
 RUN /tmp/xampp-installer.run --mode unattended
 
+# Replace extra httpd-xampp.conf
+COPY httpd-xampp.conf /opt/lampp/etc/extra/httpd-xampp.conf
+
 # Expose ports for Apache and MySQL
 EXPOSE 80
 EXPOSE 443
@@ -25,6 +28,11 @@ EXPOSE 3306
 
 # Copy ATutor source code to /opt/lampp/htdocs
 COPY ./ATutor /opt/lampp/htdocs/atutor
+
+# Fix ATutor permissions
+RUN mkdir /opt/lampp/htdocs/atutor/content
+RUN chmod 2777 /opt/lampp/htdocs/atutor/content
+RUN chmod a+rw /opt/lampp/htdocs/atutor/include/config.inc.php
 
 # Start XAMPP
 CMD ["/bin/bash", "-c", "/opt/lampp/lampp start && tail -f /dev/null"]
