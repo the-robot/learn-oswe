@@ -27,7 +27,7 @@ Please follow the instruction from the webpage at `localhost:8080/atutor`.
 > **Site contact email:** system@offsec.com  
 > **Personal:** offsec:offsec | offsec@offsec.com  
 
-Default XAMPP credentials for MySQL is `root` and no password.
+Default XAMPP credentials for MySQL is `root` and no password. MySQL query logs can be found at `/opt/lampp/logs/mysql.log`.
 
 <br/>
 
